@@ -1,0 +1,107 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    user-select: none;
+}
+
+body {
+    height: 100dvh;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    padding: 50px;
+}
+
+.modal-box {
+    border: 1px solid violet;
+    text-align: center;
+    padding: 20px;
+    position: absolute;
+    top: 0;
+    transition: all 1.5s;
+    z-index: 10;
+}
+
+.modal {
+    position: relative;
+}
+
+#close {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    cursor: pointer;
+}
+
+.hide-modal {
+    opacity: 0;
+    visibility: visible;
+}
+
+.active-modal {
+    transform: translateY(100px);
+    opacity: 1;
+    visibility: visible;
+}
+
+.hide-main {
+    filter: blur(1.2px);
+    pointer-events: none;
+}
+
+.container {
+    display: flex;
+    gap: 20px;
+    transition: all 1.5s;
+}
+
+.column {
+    border: 1px solid black;
+    width: 150px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+h2 {
+    width: 150px;
+    background-color: violet;
+    color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding-block: 5px;
+}
+
+.todos {
+    background-color: rgba(172, 255, 47, 0.603);
+    width: inherit;
+    height: 30px;
+    line-height: 1.6;
+    position: relative;
+    margin-block: 10px;
+}
+
+.todo-text {
+    border: 1px solid black;
+    width: 125px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: inherit;
+}
+
+.closing {
+    content: "";
+    height: 15px;
+    width: 15px;
+    background-color: #ff0000a0;
+    border-radius: 50%;
+    position: absolute;
+    right: 3%;
+    top: 0;
+    bottom: 0;
+    margin-block: auto;
+    cursor: pointer;
+}
