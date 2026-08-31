@@ -2,18 +2,20 @@ let $ = document;
 
 const modalBox = $.querySelector(".modal-box");
 const container = $.querySelector(".container");
-const input = $.querySelector("input");
+const input = $.querySelector("#input");
 const column1 = $.querySelector(".column1");
 const columns = $.querySelectorAll(".column");
-const handler = $.querySelector(".gg");
+const handler = $.querySelector(".todo-container");
 
-$.querySelector(".addtodo1").addEventListener("click", showModal);
+$.querySelector(".box-container__addtodo-btn").addEventListener("click", showModal);
 $.querySelector("#close").addEventListener("click", hideModal);
-$.querySelector(".addtodo2").addEventListener("click", addTodo);
+$.querySelector(".modal__addtodo-btn").addEventListener("click", addTodo);
 
 let allTodos = [];
 
 function showModal() {
+    console.log("gg2");
+    
     modalBox.classList.add("active-modal");
     container.classList.add("hide-main");
 }
@@ -60,7 +62,6 @@ function generateTodo(todosItem) {
         spanElem.addEventListener("click", () => remove(item.id));
         divElem.addEventListener("dragstart", function startedDragg(e) {
             e.dataTransfer.setData("todo", item.id);
-            console.log(item.id);
         });
     });
 }
@@ -77,15 +78,15 @@ function remove(data) {
 }
 
 columns.forEach((item) => {
+    console.log("gg");
+
     item.addEventListener("dragover", (e) => {
         e.preventDefault();
-        console.log("gg");
     });
     item.addEventListener("drop", (e) => {
         let classs = e.dataTransfer.getData("todo");
         const foundItem = $.getElementById(classs);
         item.append(foundItem);
-        console.log(`${classs}`);
     });
 });
 

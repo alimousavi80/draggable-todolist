@@ -2,42 +2,67 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    user-select: none;
 }
 
 body {
     height: 100dvh;
-    display: flex;
-    align-items: start;
-    justify-content: center;
-    padding: 50px;
+    font-family: monospace ;
 }
+
+.svg-sprite{
+    display: none ;
+}
+
+/* start modal styles */
+
 
 .modal-box {
-    border: 1px solid violet;
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    margin-inline: auto;
+    width: fit-content;
+    height: fit-content;
+    border: 1px solid darkgray;
+    border-radius: 1rem;
     text-align: center;
     padding: 20px;
-    position: absolute;
-    top: 0;
-    transition: all 1.5s;
-    z-index: 10;
+    transition: all 0.5s;
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
 }
 
-.modal {
-    position: relative;
+#input{
+    border-radius: 0.5rem;
+    border: 1px solid darkgray;
+    padding-inline: 1rem;
+    padding-block: 0.5rem;
+}
+
+.modal__addtodo-btn{
+    background-color: darkturquoise;
+    color: white;
+    border-radius: 1rem ;
+    text-align: center;
+    padding-inline: 0.5rem ;
+    font-size: 1.25rem;    
+    border: 1px white solid;
+    cursor: pointer;
 }
 
 #close {
     position: absolute;
-    top: -15px;
-    right: -15px;
+    bottom: -25%;
+    right: 1%;
+    color: gray;
     cursor: pointer;
+    width: 1.5rem;
 }
 
-.hide-modal {
-    opacity: 0;
-    visibility: visible;
-}
 
 .active-modal {
     transform: translateY(100px);
@@ -45,20 +70,33 @@ body {
     visibility: visible;
 }
 
+
+/*finish modal styles */
+
+/* start boxes */
+.container {
+    width: 40rem;
+    margin-inline: auto;
+}
+
 .hide-main {
-    filter: blur(1.2px);
+    filter: blur(1.7px);
     pointer-events: none;
 }
 
-.container {
+.box-container{
     display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 20px;
-    transition: all 1.5s;
 }
 
 .column {
-    border: 1px solid black;
-    width: 150px;
+    padding: 0.5rem;
+    border: 1px solid darkgray;
+    border-radius: 1rem;
+    max-width: 200px;
+    min-width: 150px;
     height: auto;
     display: flex;
     flex-direction: column;
@@ -66,12 +104,17 @@ body {
 }
 
 h2 {
-    width: 150px;
-    background-color: violet;
+    background-color: darkturquoise;
     color: white;
-    border-radius: 5px;
+    border-radius: 1rem ;
     text-align: center;
-    padding-block: 5px;
+    padding-block: 0.5rem ;
+    font-size: 1.25rem;
+}
+
+.box-container__addtodo-btn{
+    color: gray;
+    border-radius: 1rem
 }
 
 .todos {
@@ -105,3 +148,37 @@ h2 {
     margin-block: auto;
     cursor: pointer;
 }
+
+/* finish boxes */
+
+/* start responsive */
+
+@media screen and (max-width: 320px) {
+    .container{
+        width: 100%;
+        max-width: 320px;
+        padding-inline: 1rem ;
+    }
+}
+@media screen and (max-width: 600px) {
+    .container{
+        width: 100%;
+        max-width: 500px;
+    }
+}
+@media screen and (max-width: 768px) {
+    .container{
+        width: 100%;
+        max-width: 650px;
+    }
+}
+@media screen and (max-width: 1200px) {
+    .container{
+        width: 100%;
+        max-width: 900px;
+        padding-inline: 1rem ;
+    }
+}
+
+/* finish responsive */
+
