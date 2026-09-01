@@ -9,13 +9,15 @@
 <h4>position : need to code for better ui</h4>
 
 </br>
-<h3 align="right">: Fa </h3>
+<div  align="right">
+<h3>: Fa </h3>
 <h4> todolist با قابلیت درگ کردن</h4>
 <h4> وضعیت : نیاز به تکمیل ui </h4>
+</div>
 </br>
 </br>
 
 ح
 <h2 align="center">LINK :</h2>
 
-[persian music player](https://alimousavi80.github.io/draggable-todolist/)
+[draggable todolist](https://alimousavi80.github.io/draggable-todolist/)
