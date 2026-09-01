@@ -7,15 +7,16 @@ const column1 = $.querySelector(".column1");
 const columns = $.querySelectorAll(".column");
 const handler = $.querySelector(".todo-container");
 
-$.querySelector(".box-container__addtodo-btn").addEventListener("click", showModal);
+$.querySelector(".box-container__addtodo-btn").addEventListener(
+    "click",
+    showModal,
+);
 $.querySelector("#close").addEventListener("click", hideModal);
 $.querySelector(".modal__addtodo-btn").addEventListener("click", addTodo);
 
 let allTodos = [];
 
 function showModal() {
-    console.log("gg2");
-    
     modalBox.classList.add("active-modal");
     container.classList.add("hide-main");
 }
@@ -30,11 +31,7 @@ function addTodo() {
         id: allTodos.length,
         title: input.value,
     };
-
     allTodos.push(todos);
-
-    console.log(allTodos);
-
     saveToLocal(allTodos);
     generateTodo(allTodos);
 }
@@ -44,30 +41,25 @@ function saveToLocal(items) {
 }
 
 function generateTodo(todosItem) {
-    let divElem, pElem, spanElem;
-
     handler.innerHTML = "";
     todosItem.forEach((item) => {
-        divElem = $.createElement("div");
-        divElem.classList.add("todos");
-        divElem.id = item.id;
-        divElem.draggable = "true";
-        pElem = $.createElement("p");
-        pElem.classList.add("todo-text");
-        pElem.innerText = item.title;
-        spanElem = $.createElement("span");
-        spanElem.classList.add("closing");
-        divElem.append(pElem, spanElem);
-        handler.appendChild(divElem);
-        spanElem.addEventListener("click", () => remove(item.id));
-        divElem.addEventListener("dragstart", function startedDragg(e) {
-            e.dataTransfer.setData("todo", item.id);
-        });
+        handler.insertAdjacentHTML(
+            "beforeend",
+            `
+            <div class="todos" id=${item.id} draggable="true" ondragstart="startedDragg(event , '${item.id}')">
+                <p class="todo-text">${item.title}</p>
+                <span onclick="remove(${item.id})" class="closing"></span>
+            </div>
+            `,
+        );
     });
 }
 
+function startedDragg(event, id) {
+    event.dataTransfer.setData("todo", id);
+}
+
 function remove(data) {
-    console.log(data);
     const selected = $.getElementById(data);
     selected.remove();
     let testical = allTodos.findIndex((item) => {
@@ -78,8 +70,6 @@ function remove(data) {
 }
 
 columns.forEach((item) => {
-    console.log("gg");
-
     item.addEventListener("dragover", (e) => {
         e.preventDefault();
     });
