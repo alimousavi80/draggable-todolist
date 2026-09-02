@@ -5,16 +5,13 @@ const container = $.querySelector(".container");
 const input = $.querySelector("#input");
 const column1 = $.querySelector(".column1");
 const columns = $.querySelectorAll(".column");
-const handler = $.querySelector(".todo-container");
-
-$.querySelector(".box-container__addtodo-btn").addEventListener(
-    "click",
-    showModal,
-);
-$.querySelector("#close").addEventListener("click", hideModal);
-$.querySelector(".modal__addtodo-btn").addEventListener("click", addTodo);
+const noStatusContainer = $.querySelector(".no-status-container");
+const notStartedContainer = $.querySelector(".not-started-container");
+const inProgressContainer = $.querySelector(".in-progress-container");
+const completedContainer = $.querySelector(".completed-container");
 
 let allTodos = [];
+console.log(allTodos);
 
 function showModal() {
     modalBox.classList.add("active-modal");
@@ -27,13 +24,16 @@ function hideModal() {
 }
 
 function addTodo() {
-    let todos = {
-        id: allTodos.length,
-        title: input.value,
-    };
-    allTodos.push(todos);
-    saveToLocal(allTodos);
-    generateTodo(allTodos);
+    if (input.value !== "") {
+        let todos = {
+            id: allTodos.length,
+            title: input.value,
+            position: "no status",
+        };
+        allTodos.push(todos);
+        saveToLocal(allTodos);
+        generateTodo(allTodos);
+    }
 }
 
 function saveToLocal(items) {
@@ -41,19 +41,66 @@ function saveToLocal(items) {
 }
 
 function generateTodo(todosItem) {
-    handler.innerHTML = "";
+    noStatusContainer.innerHTML = "";
+    notStartedContainer.innerHTML = "";
+    inProgressContainer.innerHTML = "";
+    completedContainer.innerHTML = "";
+
     todosItem.forEach((item) => {
-        handler.insertAdjacentHTML(
-            "beforeend",
-            `
-            <div class="todos" id=${item.id} draggable="true" ondragstart="startedDragg(event , '${item.id}')">
-                <p class="todo-text">${item.title}</p>
-                <svg onclick="remove(${item.id})" class="todo__delete-btn">
-                    <use href="#bin-icon"></use>
-                </svg>
-            </div>
-            `,
-        );
+        console.log(item.position);
+
+        if (item.position === "no status") {
+            noStatusContainer.insertAdjacentHTML(
+                "beforeend",
+                `
+                    <div class="todos" data-position="${item.position}" id=${item.id} draggable="true" ondragstart="startedDragg(event , '${item.id}')">
+                        <p class="todo-text">${item.title}</p>
+                        <svg onclick="remove(${item.id})" class="todo__delete-btn">
+                            <use href="#bin-icon"></use>
+                        </svg>
+                    </div>
+                    `,
+            );
+        }
+        if (item.position === "not started") {
+            notStartedContainer.insertAdjacentHTML(
+                "beforeend",
+                `
+                    <div class="todos" data-position="${item.position}" id=${item.id} draggable="true" ondragstart="startedDragg(event , '${item.id}')">
+                        <p class="todo-text">${item.title}</p>
+                        <svg onclick="remove(${item.id})" class="todo__delete-btn">
+                            <use href="#bin-icon"></use>
+                        </svg>
+                    </div>
+                    `,
+            );
+        }
+        if (item.position === "in progress") {
+            inProgressContainer.insertAdjacentHTML(
+                "beforeend",
+                `
+                    <div class="todos" data-position="${item.position}" id=${item.id} draggable="true" ondragstart="startedDragg(event , '${item.id}')">
+                        <p class="todo-text">${item.title}</p>
+                        <svg onclick="remove(${item.id})" class="todo__delete-btn">
+                            <use href="#bin-icon"></use>
+                        </svg>
+                    </div>
+                    `,
+            );
+        }
+        if (item.position === "completed") {
+            completedContainer.insertAdjacentHTML(
+                "beforeend",
+                `
+                    <div class="todos" data-position="${item.position}" id=${item.id} draggable="true" ondragstart="startedDragg(event , '${item.id}')">
+                        <p class="todo-text">${item.title}</p>
+                        <svg onclick="remove(${item.id})" class="todo__delete-btn">
+                            <use href="#bin-icon"></use>
+                        </svg>
+                    </div>
+                    `,
+            );
+        }
     });
 }
 
@@ -78,6 +125,16 @@ columns.forEach((item) => {
     item.addEventListener("drop", (e) => {
         let classs = e.dataTransfer.getData("todo");
         const foundItem = $.getElementById(classs);
+        foundItem.dataset.position = item.children[0].innerHTML;
+        console.log(allTodos[foundItem.id].position);
+        console.log(item.children[0].innerHTML);
+
+        allTodos[foundItem.id].position = item.children[0].innerHTML;
+        console.log(allTodos[foundItem.id].position);
+        console.log(allTodos);
+
+        saveToLocal(allTodos);
+
         item.append(foundItem);
     });
 });
@@ -92,3 +149,9 @@ function getData() {
 }
 
 window.addEventListener("load", getData);
+$.querySelector(".box-container__addtodo-btn").addEventListener(
+    "click",
+    showModal,
+);
+$.querySelector("#close").addEventListener("click", hideModal);
+$.querySelector(".modal__addtodo-btn").addEventListener("click", addTodo);
