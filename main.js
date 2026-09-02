@@ -48,7 +48,9 @@ function generateTodo(todosItem) {
             `
             <div class="todos" id=${item.id} draggable="true" ondragstart="startedDragg(event , '${item.id}')">
                 <p class="todo-text">${item.title}</p>
-                <span onclick="remove(${item.id})" class="closing"></span>
+                <svg onclick="remove(${item.id})" class="todo__delete-btn">
+                    <use href="#bin-icon"></use>
+                </svg>
             </div>
             `,
         );

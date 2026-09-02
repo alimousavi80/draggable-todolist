@@ -7,10 +7,15 @@
 body {
     height: 100dvh;
     font-family: monospace ;
+    padding-top: 3rem;
 }
 
 .svg-sprite{
     display: none ;
+}
+
+use {
+    user-select: none;
 }
 
 /* start modal styles */
@@ -91,6 +96,7 @@ body {
     gap: 20px;
 }
 
+
 .column {
     padding: 0.5rem;
     border: 1px solid darkgray;
@@ -100,7 +106,6 @@ body {
     height: auto;
     display: flex;
     flex-direction: column;
-    gap: 10px;
 }
 
 h2 {
@@ -110,42 +115,38 @@ h2 {
     text-align: center;
     padding-block: 0.5rem ;
     font-size: 1.25rem;
+    margin-bottom: 1.5rem;
 }
 
 .box-container__addtodo-btn{
     color: gray;
-    border-radius: 1rem
+    border-radius: 1rem;
+    margin-bottom: 1.5rem;
 }
 
 .todos {
-    background-color: rgba(172, 255, 47, 0.603);
-    width: inherit;
-    height: 30px;
-    line-height: 1.6;
-    position: relative;
-    margin-block: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: gainsboro;
+    height: 2rem;
+    margin-bottom: 1rem;
+    padding-inline: 0.5rem;
+    border-radius: 0.5rem;
 }
 
 .todo-text {
-    border: 1px solid black;
-    width: 125px;
+    max-width: 6rem;
+    font-size: 1rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    height: inherit;
 }
 
-.closing {
-    content: "";
-    height: 15px;
-    width: 15px;
-    background-color: #ff0000a0;
-    border-radius: 50%;
-    position: absolute;
-    right: 3%;
-    top: 0;
-    bottom: 0;
-    margin-block: auto;
+.todo__delete-btn {
+    height: 1rem;
+    width: 1rem;
+    color: red;
     cursor: pointer;
 }
 
@@ -153,32 +154,41 @@ h2 {
 
 /* start responsive */
 
-@media screen and (max-width: 320px) {
+@media screen and (min-width: 300px) {
     .container{
         width: 100%;
-        max-width: 320px;
+        min-width: 300px;
         padding-inline: 1rem ;
     }
 }
-@media screen and (max-width: 600px) {
+
+@media screen and (min-width: 600px) {
     .container{
         width: 100%;
-        max-width: 500px;
+        min-width: 550px;
     }
 }
-@media screen and (max-width: 768px) {
+
+@media screen and (min-width: 768px) {
     .container{
         width: 100%;
-        max-width: 650px;
+        min-width: 650px;
     }
 }
-@media screen and (max-width: 1200px) {
+
+@media screen and (min-width: 1200px) {
     .container{
         width: 100%;
-        max-width: 900px;
-        padding-inline: 1rem ;
+        min-width: 1000px;
     }
 }
+
+
+
+
+
+
+
 
 /* finish responsive */
 
